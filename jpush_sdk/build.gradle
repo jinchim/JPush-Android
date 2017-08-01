@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda' // lambda表达式
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8 // lambda表达式
+        targetCompatibility JavaVersion.VERSION_1_8 // lambda表达式
+    }
+}
+
+dependencies {
+    // MQTT 协议相关
+    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.1'
+    compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+    // lambda 表达式
+    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
+    // Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    // eventbus
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+}
