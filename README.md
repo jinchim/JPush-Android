@@ -47,7 +47,7 @@ JPushSDK.getInstance().unregister();
 ### 推送消息
 
 开放一个接口用来推送消息，不管是客户端还是服务器，都可以进行消息推送，使用 POST 请求：
-http://luowenbin.jinchim.com:8888/jpush/sendMessage/ ,
+http://luowenbin.jinchim.com:8888/jpush/sendMessage ,
 需要传入参数：clientId 和 msg。
 
 
@@ -55,5 +55,5 @@ http://luowenbin.jinchim.com:8888/jpush/sendMessage/ ,
 
 * 这是本人根据 MQTT 协议开发的 Android 推送方案，轻量、高效，不用作商业用途
 * 注册服务采取了一系列保活策略，保证不被系统回收，即使锁屏也可以接收消息
-* 欢迎光临我的个人博客：http://jinchim.com/
+* 欢迎光临我的个人博客：http://jinchim.com
 * 作者：金梧
