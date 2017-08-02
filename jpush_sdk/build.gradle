@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda' // lambda表达式
-
+apply plugin: 'com.novoda.bintray-release' // jcenter
+apply plugin: 'maven' // jcenter
 
 android {
     compileSdkVersion 25
@@ -39,3 +40,19 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
 
 }
+
+// jcenter
+publish {
+    userOrg = 'jinwu1' // bintray 用户名，这个是网站上 url 上的用户名
+    groupId = 'com.jinchim' // jcenter 上的路径
+    artifactId = 'jpush' // 创建的仓库名称
+    publishVersion = '1.0.0' // 版本号
+    desc = 'pushsdk' // 描述，不重要
+    website = 'https://github.com/jinchim/JPush-Android' // 网站，不重要，尽量模拟 github 上的地址
+}
+
+// 上传到 bintray 的命令
+// gradlew clean build bintrayUpload
+// -PbintrayUser=a463674420 （这里是网站头像旁边对应的帐号，有可能跟网址上面的不一样，一定要区分好）
+// -PbintrayKey=6f5e4e11d2d253a2d4************** （这个是上面让大家复制保存下来的key[这里为了安全，我将我key后几位替换成了**]）
+// -PdryRun=false（如果是false那么就会真实提交，如果是true不会去进行真实提交，但是会编译，可以去查看是否编译通过在提交）

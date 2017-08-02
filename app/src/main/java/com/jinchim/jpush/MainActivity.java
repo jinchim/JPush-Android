@@ -18,6 +18,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String clientId) {
                 Log.i("jinchim", "onSuccess => " + clientId);
+                JPushSDK.getInstance().register(new JPushMessageCallback() {
+                    @Override
+                    public void onMessage(String msg) {
+                        Log.i("jinchim", "onMessage => " + msg);
+                    }
+                });
             }
 
             @Override
@@ -25,12 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("jinchim", "onFailed => " + msg);
             }
         });
-        JPushSDK.getInstance().register(new JPushMessageCallback() {
-            @Override
-            public void onMessage(String msg) {
-                Log.i("jinchim", "onMessage => " + msg);
-            }
-        });
+
     }
 
 

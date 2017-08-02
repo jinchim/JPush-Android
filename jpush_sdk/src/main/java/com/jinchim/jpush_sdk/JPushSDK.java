@@ -32,7 +32,9 @@ public class JPushSDK {
     private JPushInitCallback initCallback;
 
     // 这个值用来记录客户端 ID
-    public String clientId;
+    private String clientId;
+    // 是否初始化成功
+    private boolean isInitSuccess;
 
 
     public void init(Context context, JPushInitCallback initCallback) {
@@ -50,22 +52,23 @@ public class JPushSDK {
             public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
                 if (!response.isSuccessful()) {
                     Log.i(TAG, "server failed");
-                    if (initCallback != null) {
-                        initCallback.onFailed("server failed");
+                    if (JPushSDK.this.initCallback != null) {
+                        JPushSDK.this.initCallback.onFailed("server failed");
                     }
                     return;
                 }
                 ApiResponse apiResponse = response.body();
                 if (apiResponse.status == ApiResponse.Status_Success) {
+                    isInitSuccess = true;
                     Log.i(TAG, "init success");
                     Log.i(TAG, "response => " + apiResponse.data);
-                    if (initCallback != null) {
-                        initCallback.onSuccess((String) apiResponse.data);
+                    if (JPushSDK.this.initCallback != null) {
+                        JPushSDK.this.initCallback.onSuccess((String) apiResponse.data);
                     }
                 } else {
                     Log.i(TAG, "init failed => " + apiResponse.msg);
-                    if (initCallback != null) {
-                        initCallback.onFailed(apiResponse.msg);
+                    if (JPushSDK.this.initCallback != null) {
+                        JPushSDK.this.initCallback.onFailed(apiResponse.msg);
                     }
                 }
             }
@@ -81,6 +84,10 @@ public class JPushSDK {
     public void register(JPushMessageCallback messageCallback) {
         if (context == null) {
             Log.i(TAG, "context null");
+            return;
+        }
+        if (!isInitSuccess) {
+            Log.i(TAG, "init failed");
             return;
         }
         Log.i(TAG, "register");
