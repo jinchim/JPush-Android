@@ -47,7 +47,7 @@ JPushSDK.getInstance().unregister();
 ### 推送消息
 
 开放一个接口用来推送消息，不管是客户端还是服务器，都可以进行消息推送，使用 POST 请求：
-http://luowenbin.jinchim.com:8888/jpush/sendMessage ,
+http://luowenbin.jinchim.com:8888/jpush/sendMessage ，
 需要传入参数：clientId 和 msg。
 
 
