@@ -10,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
- * 这个页面是只有一个像素的透明页面，在单独的进程里面
+ * 这个页面是只有一个像素的透明页面，在单独的进程里面，现已废弃
  */
 
 public class LiveActivity extends Activity {

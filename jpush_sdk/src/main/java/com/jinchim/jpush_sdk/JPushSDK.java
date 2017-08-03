@@ -3,7 +3,6 @@ package com.jinchim.jpush_sdk;
 import android.content.Context;
 import android.util.Log;
 
-import com.jinchim.jpush_sdk.live.LiveService;
 import com.jinchim.jpush_sdk.network.Api;
 import com.jinchim.jpush_sdk.network.ApiResponse;
 import com.jinchim.jpush_sdk.utils.DeviceUtils;
@@ -36,15 +35,12 @@ public class JPushSDK {
     // 是否初始化成功
     private boolean isInitSuccess;
 
-
     public void init(Context context, JPushInitCallback initCallback) {
         Log.i(TAG, "init start");
         this.context = context;
+        this.initCallback = initCallback;
         api = RetrofitUtils.createChemiApi();
         clientId = DeviceUtils.getLocalMacAddressFromIp(context);
-
-        // 设置回调
-        this.initCallback = initCallback;
 
         // 网络请求
         api.init(clientId).enqueue(new Callback<ApiResponse<String>>() {
@@ -91,13 +87,14 @@ public class JPushSDK {
             return;
         }
         Log.i(TAG, "register");
-        JPushService.start(context, clientId);
-        LiveService.start(context);
-
-        // 注册 EventBus
-        EventBus.getDefault().register(this);
         // 设置回调
         this.messageCallback = messageCallback;
+        // 启动服务
+        JPushService.start(context, clientId);
+        // 注册 EventBus
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
 
@@ -107,9 +104,8 @@ public class JPushSDK {
             return;
         }
         Log.i(TAG, "unregister");
+        // 停止服务
         JPushService.stop(context);
-        LiveService.stop(context);
-
         // 注销 EventBus
         EventBus.getDefault().unregister(this);
     }

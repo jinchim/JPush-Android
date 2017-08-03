@@ -15,15 +15,7 @@
 
         <activity
             android:name=".live.LiveActivity"
-            android:process=":live"
             android:theme="@style/LiveStyle"/>
-
-        <service
-            android:name=".live.LiveService"
-            android:process=":live"/>
-        <service
-            android:name=".live.LiveService$LiveForeService"
-            android:process=":live"/>
 
         <!-- MQTT 的服务，如需使用 MqttAndroidClient 则需要注册这个 Service -->
         <service

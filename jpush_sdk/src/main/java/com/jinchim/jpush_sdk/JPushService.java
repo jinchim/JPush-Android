@@ -10,6 +10,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.jinchim.jpush_sdk.live.ScreenBroadcastListener;
+import com.jinchim.jpush_sdk.live.ScreenManager;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -23,7 +26,7 @@ import org.greenrobot.eventbus.EventBus;
 
 
 /**
- * MQTT 协议的服务，这里继承了 JobService
+ * MQTT 协议的服务
  */
 public class JPushService extends Service implements IMqttActionListener, MqttCallback {
 
@@ -63,6 +66,22 @@ public class JPushService extends Service implements IMqttActionListener, MqttCa
             startForeground(NOTIFICATION_ID, builder.build());
             startService(new Intent(this, JPushForeService.class));
         }
+
+        // 启动屏幕管理监听
+        ScreenBroadcastListener listener = new ScreenBroadcastListener(this);
+        listener.registerListener(new ScreenBroadcastListener.ScreenStateListener() {
+            @Override
+            public void onScreenOn() {
+                Log.i(TAG, "onScreenOn");
+                ScreenManager.getInstance(JPushService.this).finishActivity();
+            }
+
+            @Override
+            public void onScreenOff() {
+                Log.i(TAG, "onScreenOff");
+                ScreenManager.getInstance(JPushService.this).startActivity();
+            }
+        });
     }
 
     @Override
@@ -84,7 +103,6 @@ public class JPushService extends Service implements IMqttActionListener, MqttCa
         // 断开连接
         disconnect();
     }
-
 
 
     // 灰色保活
@@ -118,11 +136,12 @@ public class JPushService extends Service implements IMqttActionListener, MqttCa
     }
 
 
-
-
     //----------------------push--------------------//
 
     private void init() {
+        if (client != null) {
+            return;
+        }
         client = new MqttAndroidClient(this, serverUri, clientId, new MemoryPersistence()); // 初始化一个对象，这里指定信息缓存方法为内存缓存
         client.setCallback(this);
         options = new MqttConnectOptions();

@@ -46,7 +46,7 @@ publish {
     userOrg = 'jinwu1' // bintray 用户名，这个是网站上 url 上的用户名
     groupId = 'com.jinchim' // jcenter 上的路径
     artifactId = 'jpush' // 创建的仓库名称
-    publishVersion = '1.0.0' // 版本号
+    publishVersion = '1.0.1' // 版本号
     desc = 'pushsdk' // 描述，不重要
     website = 'https://github.com/jinchim/JPush-Android' // 网站，不重要，尽量模拟 github 上的地址
 }
