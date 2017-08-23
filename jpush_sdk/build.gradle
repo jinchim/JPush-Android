@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'me.tatarka.retrolambda' // lambda表达式
-apply plugin: 'com.novoda.bintray-release' // jcenter
-apply plugin: 'maven' // jcenter
+apply plugin: 'bintray-release' // jcenter
 
 android {
     compileSdkVersion 25
@@ -46,9 +45,10 @@ publish {
     userOrg = 'jinwu1' // bintray 用户名，这个是网站上 url 上的用户名
     groupId = 'com.jinchim' // jcenter 上的路径
     artifactId = 'jpush' // 创建的仓库名称
-    publishVersion = '1.0.1' // 版本号
+    publishVersion = '1.0.2' // 版本号
     desc = 'pushsdk' // 描述，不重要
     website = 'https://github.com/jinchim/JPush-Android' // 网站，不重要，尽量模拟 github 上的地址
+    licences = ['Apache-2.0'] // 指定许可证
 }
 
 // 上传到 bintray 的命令
