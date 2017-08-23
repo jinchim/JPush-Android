@@ -7,7 +7,7 @@
 在对应模块的 build.gradle 中的 dependencies 标签中加入：
 
 ``` gradle
-compile 'com.jinchim:jpush:1.0.1'
+compile 'com.jinchim:jpush:1.0.2'
 ```
 
 ### 初始化 SDK
