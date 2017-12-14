@@ -5,24 +5,19 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'me.tatarka:gradle-retrolambda:3.4.0' // lambda表达式
-        classpath 'com.novoda:bintray-release:0.3.4' // jcenter
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.novoda:bintray-release:0.8.0' // jcenter
     }
 }
 
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url "https://repo.eclipse.org/content/repositories/paho-releases/"
-        }
+        maven { url 'https://repo.eclipse.org/content/repositories/paho-releases/' }
     }
     // 解决上传到 bintray 时的编码 GBK 的不可映射字符错误
     tasks.withType(Javadoc) {
-        options{
+        options {
             encoding "UTF-8"
             charSet 'UTF-8'
         }

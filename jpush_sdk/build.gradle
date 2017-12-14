@@ -1,18 +1,13 @@
 apply plugin: 'com.android.library'
-apply plugin: 'me.tatarka.retrolambda' // lambda表达式
 apply plugin: 'bintray-release' // jcenter
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
-
+    compileSdkVersion 26
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
-
-
     }
     buildTypes {
         release {
@@ -21,8 +16,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8 // lambda表达式
-        targetCompatibility JavaVersion.VERSION_1_8 // lambda表达式
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -30,8 +25,6 @@ dependencies {
     // MQTT 协议相关
     compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.1'
     compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
-    // lambda 表达式
-    retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:2.3.0'
     // Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     // eventbus
