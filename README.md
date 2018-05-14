@@ -57,5 +57,5 @@ http://luowenbin.jinchim.com:8888/jpush/sendMessage ，
 * 注册服务采取了一系列保活策略，保证不被系统回收，即使锁屏很长时间也可以接收消息
 * 注册一定要在初始化成功后才能调用，否则注册不成功
 * 只有两种情况会接收不到消息：手动杀死进程、调用注销方法
-* 欢迎光临我的个人博客：http://jinchim.com
+* 欢迎光临我的个人博客：http://blog.jinchim.com
 * 作者：金梧
